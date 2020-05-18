@@ -21,6 +21,7 @@ public class Area
     {
         Cell[,,] grid = new Cell[size, size, size];
         Vector3 cellSize = cellPrefab.GetComponent<Renderer>().bounds.size;
+        float offset = (float)(size - 1) / 2;
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
@@ -29,10 +30,10 @@ public class Area
                 {
                     Quaternion rotation = cellPrefab.transform.rotation;
                     Vector3 position = new Vector3(
-                        x * (cellSize.x + streak),
+                        (x - offset) * (cellSize.x + streak),
                         y * (cellSize.y + streak),
-                        z * (cellSize.z + streak));
-                    GameObject gameObject = Object.Instantiate(cellPrefab, position, rotation, parent);
+                        (z - offset) * (cellSize.z + streak));
+                    GameObject gameObject = Object.Instantiate(cellPrefab, position + parent.position, rotation, parent);
                     Cell cell = gameObject.GetComponent<Cell>();
                     cell.Set(x, y, z);
                     grid[x, y, z] = cell;

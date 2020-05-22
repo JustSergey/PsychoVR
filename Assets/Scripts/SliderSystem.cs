@@ -6,10 +6,8 @@ using UnityEngine.UI;
 
 public class SliderSystem : MonoBehaviour
 {
-
     public Slider slider;
     public Text text;
-
 
     void Update()
     {

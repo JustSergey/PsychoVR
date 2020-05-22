@@ -6,9 +6,9 @@ using UnityEngine;
 [Serializable]
 public class WorldConfig
 {
-    public int size;
-    public float streak;
-    public float randomInfectionChance;
-    public float spreadInfectionChance;
-    public float propagationTime;
+    public Vector3Int Size;
+    public float Streak;
+    public float RandomInfectionChance;
+    public float SpreadInfectionChance;
+    public float PropagationTime;
 }

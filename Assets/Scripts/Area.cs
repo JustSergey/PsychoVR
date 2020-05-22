@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class Area
@@ -8,31 +9,32 @@ public class Area
 
     Cell[,,] grid;
     List<Cell> infectedCells;
-    int size;
+    Vector3Int size;
 
-    public Area(int size, float streak, GameObject cellPrefab, Transform parent)
+    public Area(Vector3Int size, float streak, GameObject cellPrefab, Transform parent)
     {
         this.size = size;
         grid = GenerateGrid(size, streak, cellPrefab, parent);
         infectedCells = new List<Cell>();
     }
 
-    private Cell[,,] GenerateGrid(int size, float streak, GameObject cellPrefab, Transform parent)
+    private Cell[,,] GenerateGrid(Vector3Int size, float streak, GameObject cellPrefab, Transform parent)
     {
-        Cell[,,] grid = new Cell[size, size, size];
+        Cell[,,] grid = new Cell[size.x, size.y, size.z];
         Vector3 cellSize = cellPrefab.GetComponent<Renderer>().bounds.size;
-        float offset = (float)(size - 1) / 2;
-        for (int x = 0; x < size; x++)
+        float offsetX = (float)(size.x - 1) / 2;
+        float offsetZ = (float)(size.z - 1) / 2;
+        for (int x = 0; x < size.x; x++)
         {
-            for (int y = 0; y < size; y++)
+            for (int y = 0; y < size.y; y++)
             {
-                for (int z = 0; z < size; z++)
+                for (int z = 0; z < size.z; z++)
                 {
                     Quaternion rotation = cellPrefab.transform.rotation;
                     Vector3 position = new Vector3(
-                        (x - offset) * (cellSize.x + streak),
+                        (x - offsetX) * (cellSize.x + streak),
                         y * (cellSize.y + streak),
-                        (z - offset) * (cellSize.z + streak));
+                        (z - offsetZ) * (cellSize.z + streak));
                     GameObject gameObject = Object.Instantiate(cellPrefab, position + parent.position, rotation, parent);
                     Cell cell = gameObject.GetComponent<Cell>();
                     cell.Set(x, y, z);
@@ -45,9 +47,9 @@ public class Area
 
     private void TryInfect(int x, int y, int z)
     {
-        if (x >= 0 && x < size &&
-            y >= 0 && y < size &&
-            z >= 0 && z < size && !grid[x, y, z].IsInfected)
+        if (x >= 0 && x < size.x &&
+            y >= 0 && y < size.y &&
+            z >= 0 && z < size.z && !grid[x, y, z].IsInfected)
         {
             grid[x, y, z].Infect();
             infectedCells.Add(grid[x, y, z]);
@@ -64,9 +66,9 @@ public class Area
     {
         if (Random.value <= chance)
         {
-            int x = (int)(Random.Range(0f, size) * error);
-            int y = (int)(Random.Range(0f, size) * error);
-            int z = (int)(Random.Range(0f, size) * error);
+            int x = (int)(Random.Range(0f, size.x) * error);
+            int y = (int)(Random.Range(0f, size.y) * error);
+            int z = (int)(Random.Range(0f, size.z) * error);
             TryInfect(x, y, z);
         }
     }

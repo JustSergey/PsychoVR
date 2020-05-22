@@ -15,16 +15,15 @@ public class MenuControls : MonoBehaviour
 
     public void PlayPressed()
     {
-        var settings = new WorldConfig();
-
-        settings.size = Convert.ToInt32(SizeSlider.value);
-        settings.streak = Convert.ToSingle(Math.Round(StreakSlider.value, 2));
-        settings.randomInfectionChance = Convert.ToSingle(Math.Round(InfectionChanceSlider.value, 2));
-        settings.spreadInfectionChance = Convert.ToSingle(Math.Round(SpreadChanceSlider.value, 2));
-        settings.propagationTime = Convert.ToSingle(Math.Round(PropagationTimeSlider.value, 2));
-
-        System.IO.File.WriteAllText(Application.dataPath + "/WorldSettings.json" ,JsonUtility.ToJson(settings));
-
+        var settings = new WorldConfig
+        {
+            //Size = (int)SizeSlider.value,
+            Streak = StreakSlider.value,
+            RandomInfectionChance = InfectionChanceSlider.value,
+            SpreadInfectionChance = SpreadChanceSlider.value,
+            PropagationTime = PropagationTimeSlider.value
+        };
+        System.IO.File.WriteAllText(Application.dataPath + "/WorldSettings.json", JsonUtility.ToJson(settings));
         SceneManager.LoadScene("SampleScene");
     }
 }

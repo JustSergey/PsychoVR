@@ -548,13 +548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b770381918434fb47adc6755b39043a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Size: 7
-  Streak: 0.5
   CellPrefab: {fileID: 4158296602964601685, guid: 6b0950aa85fc9d549ae09110775debcf,
     type: 3}
-  RandomInfectionChance: 0.8
-  SpreadInfectionChance: 0.02
-  PropagationTime: 2
 --- !u!4 &1172496400
 Transform:
   m_ObjectHideFlags: 0
@@ -666,8 +661,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb3a85357e56c6e4a90bd75764354ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sensitivity: 200
-  Speed: 50
+  Sensitivity: 400
+  Speed: 30
   World: {fileID: 1172496398}
 --- !u!114 &1487941530
 MonoBehaviour:

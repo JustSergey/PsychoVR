@@ -15,9 +15,9 @@ public class World : MonoBehaviour
 
     void Start()
     {
-        string configJSON = System.IO.File.ReadAllText(Application.dataPath + "/WorldSettings.json");
-        WorldConfig worldConfig = JsonUtility.FromJson<WorldConfig>(configJSON);
-        SetParams(worldConfig);
+        string json = System.IO.File.ReadAllText(Application.dataPath + "/WorldSettings.json");
+        WorldConfig config = JsonUtility.FromJson<WorldConfig>(json);
+        SetParams(config);
 
         area = new Area(size, streak, CellPrefab, transform);
         area.RandomInfection(1.0f);

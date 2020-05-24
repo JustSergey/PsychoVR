@@ -7,7 +7,9 @@ using UnityEngine.UI;
 
 public class MenuControls : MonoBehaviour
 {
-    public Slider SizeSlider;
+    public Slider WidthSlider;
+    public Slider LengthSlider;
+    public Slider HeightSlider;
     public Slider StreakSlider;
     public Slider InfectionChanceSlider;
     public Slider SpreadChanceSlider;
@@ -17,7 +19,7 @@ public class MenuControls : MonoBehaviour
     {
         var settings = new WorldConfig
         {
-            //Size = (int)SizeSlider.value,
+            Size = new Vector3Int((int)LengthSlider.value, (int)WidthSlider.value, (int)HeightSlider.value),
             Streak = StreakSlider.value,
             RandomInfectionChance = InfectionChanceSlider.value,
             SpreadInfectionChance = SpreadChanceSlider.value,
